@@ -35,16 +35,17 @@ export default function HomePage() {
     }
 
     return (
-        <ContainerHome>
+        <ContainerHome loading={loading}>
             <form onSubmit={login}>
                 <input type="email" placeholder="   email" required value={email}
                     onChange={e => setEmail(e.target.value)} disabled={loading ? true : false} />
                 <input type="password" placeholder="   senha" required value={password}
                     onChange={e => setPassword(e.target.value)} disabled={loading ? true : false} />
                 <button type="submit" disabled={loading ? true : false}>{loading ? <ThreeDots color="#FFFFFF" /> : "Entrar"}</button>
-                <Link to="/cadastro">
-                    <h2>Não tem uma conta? Cadastre-se!</h2>
-                </Link>
+                <h2 onClick={() => {
+                    if (!loading)
+                        navigate("/cadastro")
+                }}>Não tem uma conta? Cadastre-se!</h2>
             </form>
         </ContainerHome>
     );

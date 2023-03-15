@@ -49,9 +49,10 @@ export default function SignUp() {
                 <input type="text" placeholder="   foto" required value={image}
                     onChange={e => setImage(e.target.value)} disabled={loading ? true : false} />
                 <button type="submit" disabled={loading ? true : false}>{loading ? <ThreeDots color="#FFFFFF" /> : "Cadastrar"}</button>
-                <Link to="/">
-                    <h2>Já tem uma conta? Faça login!</h2>
-                </Link>
+                <h2 onClick={() => {
+                    if (!loading)
+                        navigate("/")
+                }}>Já tem uma conta? Faça login!</h2>
             </form>
         </ContainerHome>
     );
