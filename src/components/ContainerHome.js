@@ -2,17 +2,14 @@ import styled from "styled-components";
 import logo from "../styles/logo.svg"
 import { Link } from "react-router-dom";
 
-export default function ContainerHome({ children, text }) {
+export default function ContainerHome({ children, loading}) {
 
     return (
-        <Container>
+        <Container loading={loading}>
             <Link to="/">
                 <img src={logo} alt="TrackIt" />
             </Link>
             {children}
-            <Link to="/cadastro">
-                <h2>{text}</h2>
-            </Link>
         </Container>
     );
 }
@@ -45,16 +42,22 @@ const Container = styled.div`
             margin-top: 1vh;
             font-weight: 400;
             font-size: 2.5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         input {
-            background-color: #FFFFFF;
-            color: #DBDBDB;
+            background-color: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};
+            &::placeholder {
+                color: #DBDBDB;
+            }
         }
 
         button {
             background-color: #52B6FF;
             color: #FFFFFF;
+            opacity: ${props => props.loading ? "0.7" : "initial"};
         }
     }
 
