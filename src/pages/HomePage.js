@@ -1,15 +1,15 @@
 import ContainerHome from "../components/ContainerHome";
 import { ThreeDots } from "react-loader-spinner";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
-export default function HomePage() {
+export default function HomePage({ setUser }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(null);
+    const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     function login(e) {
@@ -21,7 +21,7 @@ export default function HomePage() {
             email: email,
             password: password
         })
-            .then(res => { setUser(res.data); navigate("/cadastro"); })
+            .then(res => { setUser(res.data); navigate("/hoje"); })
             .catch(err => {
                 if (err.response.data.details) {
                     err.response.data.details.forEach(element => {
@@ -35,18 +35,26 @@ export default function HomePage() {
     }
 
     return (
-        <ContainerHome loading={loading}>
-            <form onSubmit={login}>
-                <input type="email" placeholder="   email" required value={email}
-                    onChange={e => setEmail(e.target.value)} disabled={loading ? true : false} />
-                <input type="password" placeholder="   senha" required value={password}
-                    onChange={e => setPassword(e.target.value)} disabled={loading ? true : false} />
-                <button type="submit" disabled={loading ? true : false}>{loading ? <ThreeDots color="#FFFFFF" /> : "Entrar"}</button>
-                <h2 onClick={() => {
-                    if (!loading)
-                        navigate("/cadastro")
-                }}>Não tem uma conta? Cadastre-se!</h2>
-            </form>
-        </ContainerHome>
+        <Body>
+            <ContainerHome isLoading={isLoading}>
+                <form onSubmit={login}>
+                    <input type="email" placeholder="   email" required value={email}
+                        onChange={e => setEmail(e.target.value)} disabled={isLoading ? true : false} />
+                    <input type="password" placeholder="   senha" required value={password}
+                        onChange={e => setPassword(e.target.value)} disabled={isLoading ? true : false} />
+                    <button type="submit" disabled={isLoading ? true : false}>{isLoading ? <ThreeDots color="#FFFFFF" /> : "Entrar"}</button>
+                    <h2 onClick={() => {
+                        if (!isLoading)
+                            navigate("/cadastro")
+                    }}>Não tem uma conta? Cadastre-se!</h2>
+                </form>
+            </ContainerHome>
+        </Body>
     );
 }
+
+const Body = styled.div`
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFFFFF;
+`

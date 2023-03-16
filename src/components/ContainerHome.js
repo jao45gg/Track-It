@@ -2,10 +2,10 @@ import styled from "styled-components";
 import logo from "../styles/logo.svg"
 import { Link } from "react-router-dom";
 
-export default function ContainerHome({ children, loading}) {
+export default function ContainerHome({ children, isLoading}) {
 
     return (
-        <Container loading={loading}>
+        <Container isLoading={isLoading}>
             <Link to="/">
                 <img src={logo} alt="TrackIt" />
             </Link>
@@ -48,7 +48,7 @@ const Container = styled.div`
         }
 
         input {
-            background-color: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};
+            background-color: ${props => props.isLoading ? "#F2F2F2" : "#FFFFFF"};
             &::placeholder {
                 color: #DBDBDB;
             }
@@ -57,7 +57,7 @@ const Container = styled.div`
         button {
             background-color: #52B6FF;
             color: #FFFFFF;
-            opacity: ${props => props.loading ? "0.7" : "initial"};
+            opacity: ${props => props.isLoading ? "0.7" : "initial"};
         }
     }
 
