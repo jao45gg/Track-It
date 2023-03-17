@@ -38,8 +38,8 @@ const DivHeader = styled.div`
     box-sizing: border-box;
 
     div {
-        width: 91px;
-        height: 91px;
+        width: 27vw;
+        height: 16vh;
         margin-bottom: 8vh;
     }
 
@@ -57,7 +57,7 @@ const DivHeader = styled.div`
     h1 {
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
-        font-size: 18px;
+        font-size: 2.5vh;
         color: #52B6FF;
     }
 `;

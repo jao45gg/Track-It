@@ -40,16 +40,16 @@ export default function SignUp() {
     return (
         <ContainerHome loading={loading}>
             <form onSubmit={signUp}>
-                <input type="email" placeholder="   email" required value={email}
+                <input data-test="email-input" type="email" placeholder="   email" required value={email}
                     onChange={e => setEmail(e.target.value)} disabled={loading ? true : false} />
-                <input type="password" placeholder="   senha" required value={password}
+                <input data-test="password-input" type="password" placeholder="   senha" required value={password}
                     onChange={e => setPassword(e.target.value)} disabled={loading ? true : false} />
-                <input type="text" placeholder="   nome" required value={name}
+                <input data-test="user-name-input" type="text" placeholder="   nome" required value={name}
                     onChange={e => setName(e.target.value)} disabled={loading ? true : false} />
-                <input type="text" placeholder="   foto" required value={image}
+                <input data-test="user-image-input" type="text" placeholder="   foto" required value={image}
                     onChange={e => setImage(e.target.value)} disabled={loading ? true : false} />
-                <button type="submit" disabled={loading ? true : false}>{loading ? <ThreeDots color="#FFFFFF" /> : "Cadastrar"}</button>
-                <h2 onClick={() => {
+                <button data-test="signup-btn" type="submit" disabled={loading ? true : false}>{loading ? <ThreeDots color="#FFFFFF" /> : "Cadastrar"}</button>
+                <h2 data-test="login-link" onClick={() => {
                     if (!loading)
                         navigate("/")
                 }}>Já tem uma conta? Faça login!</h2>

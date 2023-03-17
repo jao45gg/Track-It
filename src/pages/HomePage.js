@@ -38,12 +38,12 @@ export default function HomePage({ setUser }) {
         <Body>
             <ContainerHome isLoading={isLoading}>
                 <form onSubmit={login}>
-                    <input type="email" placeholder="   email" required value={email}
+                    <input data-test="email-input" type="email" placeholder="   email" required value={email}
                         onChange={e => setEmail(e.target.value)} disabled={isLoading ? true : false} />
-                    <input type="password" placeholder="   senha" required value={password}
+                    <input data-test="password-input" type="password" placeholder="   senha" required value={password}
                         onChange={e => setPassword(e.target.value)} disabled={isLoading ? true : false} />
-                    <button type="submit" disabled={isLoading ? true : false}>{isLoading ? <ThreeDots color="#FFFFFF" /> : "Entrar"}</button>
-                    <h2 onClick={() => {
+                    <button data-test="login-btn" type="submit" disabled={isLoading ? true : false}>{isLoading ? <ThreeDots color="#FFFFFF" /> : "Entrar"}</button>
+                    <h2 data-test="signup-link" onClick={() => {
                         if (!isLoading)
                             navigate("/cadastro")
                     }}>Não tem uma conta? Cadastre-se!</h2>
