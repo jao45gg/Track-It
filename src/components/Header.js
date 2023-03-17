@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { LevelContext } from "../constant";
 import trackIt from "../styles/TrackIt.svg"
@@ -9,8 +10,10 @@ export default function Header() {
 
     return (
         <DivHeader>
-            <img className="logo" src={trackIt} alt="TrackIt"/>
-            <img className="usrImage" src={user.image} alt={user.name}/>
+            <Link to="/">
+                <img className="logo" src={trackIt} alt="TrackIt" />
+            </Link>
+            <img className="usrImage" src={user.image} alt={user.name} />
         </DivHeader>
     );
 }

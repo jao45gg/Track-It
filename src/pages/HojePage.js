@@ -14,18 +14,11 @@ export default function HojePage() {
         <Body backColor="#E5E5E5">
             <Header />
             <Container>
-                <h1>Segunda, 17/05</h1>
-                <h2>Nenhum hábito concluído ainda</h2>
+                <div className="fixed">
+                    <h1>Segunda, 17/05</h1>
+                    <h2>Nenhum hábito concluído ainda</h2>
+                </div>
                 <main>
-                    <Habit>
-                        <div>
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <h2>Sequência atual: 3 dias Seu recorde: 5 dias</h2>
-                        </div>
-                        <Checkbox>
-                            <img src={vector} alt="check" />
-                        </Checkbox>
-                    </Habit>
                     <Habit>
                         <div>
                             <h1>Ler 1 capítulo de livro</h1>
@@ -70,63 +63,75 @@ export default function HojePage() {
 }
 
 const Container = styled.div`
-    height: 400px;
-    margin-top: 15vh;
-    padding: 0 20px 0 20px;
+    height: 68vh;
+    margin-top: 17vh;
+    padding: 0 6vw 0 6vw;
     box-sizing: border-box;
+    display: flex;
 
     main {
-       height: 350px;
-       overflow-y: auto;
-       margin-top: 15px;
+        margin-top: 12vh;
+        overflow-y: scroll;
+        height: 53vh;
+    }
+
+    .fixed {
+        position: fixed;
     }
 
     h1{
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
         color: #126BA5;
-        font-size: 23px;
+        font-size: 3.2vh;
     }
 
     h2{
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
         color: #BABABA;
-        font-size: 18px;
+        font-size: 2.3vh;
         margin-top: 1vh;
     }
 `
 
 const Habit = styled.div`
-    height: auto;
-    margin-bottom: 10px;
+    width: 88vw;
+    height: 16vh;
+    margin-bottom: 1.7vh;
     background-color: #FFFFFF;
-    padding: 15px;
+    padding: 4mm;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     h1 {
-        width: 180px;
+        width: 54vw;
         color: #666666;
-        font-size: 17px;
+        font-size: 2.2vh;
+        background-color: red;
     }
 
     h2 {
         color: #666666;
-        font-size: 12px;
-        width: 150px;
+        font-size: 1.6vh;
+        width: 45vw;
     }
 `
 
 const Checkbox = styled.div`
-    width: 69px;
-    height: 69px;
+    width: 21vw;
+    height: 11.5vh;
     background-color: green;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid #E7E7E7;
     border-radius: 5px;
+
+    img {
+        width: 10.5vw;
+        height: 5vh;
+    }
 `

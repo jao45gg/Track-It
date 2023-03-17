@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { LevelContext } from "../constant";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
+import { Link } from "react-router-dom";
 
 export default function Footer() {
 
@@ -10,16 +11,22 @@ export default function Footer() {
 
     return (
         <DivHeader>
-            <h1>Hábitos</h1>
+            <Link to="/habitos" style={{ textDecoration: "none" }}>
+                <h1>Hábitos</h1>
+            </Link>
             <div>
-                <CircularProgressbar text="Hoje" background backgroundPadding={6} value={66} styles={buildStyles({
-                    backgroundColor: "#52B6FF",
-                    trailColor: "transparent",
-                    pathColor: "#FFFFFF",
-                    textColor: "#FFFFFF"
-                })} />
+                <Link to="/hoje" style={{ textDecoration: "none" }}>
+                    <CircularProgressbar text="Hoje" background backgroundPadding={6} value={66} styles={buildStyles({
+                        backgroundColor: "#52B6FF",
+                        trailColor: "transparent",
+                        pathColor: "#FFFFFF",
+                        textColor: "#FFFFFF"
+                    })} />
+                </Link>
             </div>
-            <h1>Histórico</h1>
+            <Link to="/historico" style={{ textDecoration: "none" }}>
+                <h1>Histórico</h1>
+            </Link>
         </DivHeader>
     );
 }
