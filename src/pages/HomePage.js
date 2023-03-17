@@ -3,7 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
+import { Body } from "../styles/styles";
 
 export default function HomePage({ setUser }) {
 
@@ -35,7 +35,7 @@ export default function HomePage({ setUser }) {
     }
 
     return (
-        <Body>
+        <Body backColor="#FFFFFF">
             <ContainerHome isLoading={isLoading}>
                 <form onSubmit={login}>
                     <input data-test="email-input" type="email" placeholder="   email" required value={email}
@@ -52,9 +52,3 @@ export default function HomePage({ setUser }) {
         </Body>
     );
 }
-
-const Body = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background-color: #FFFFFF;
-`

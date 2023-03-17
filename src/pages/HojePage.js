@@ -4,18 +4,37 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import vector from "../styles/Vector.svg"
+import { Body } from "../styles/styles";
 
 export default function HojePage() {
 
     const user = useContext(LevelContext);
 
     return (
-        <Body>
+        <Body backColor="#E5E5E5">
             <Header />
             <Container>
                 <h1>Segunda, 17/05</h1>
                 <h2>Nenhum hábito concluído ainda</h2>
                 <main>
+                    <Habit>
+                        <div>
+                            <h1>Ler 1 capítulo de livro</h1>
+                            <h2>Sequência atual: 3 dias Seu recorde: 5 dias</h2>
+                        </div>
+                        <Checkbox>
+                            <img src={vector} alt="check" />
+                        </Checkbox>
+                    </Habit>
+                    <Habit>
+                        <div>
+                            <h1>Ler 1 capítulo de livro</h1>
+                            <h2>Sequência atual: 3 dias Seu recorde: 5 dias</h2>
+                        </div>
+                        <Checkbox>
+                            <img src={vector} alt="check" />
+                        </Checkbox>
+                    </Habit>
                     <Habit>
                         <div>
                             <h1>Ler 1 capítulo de livro</h1>
@@ -50,25 +69,16 @@ export default function HojePage() {
     );
 }
 
-const Body = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #E5E5E5;
-`
-
 const Container = styled.div`
-    height: 350px;
-    background-color: peru;
-    margin-top: 18vh;
+    height: 400px;
+    margin-top: 15vh;
     padding: 0 20px 0 20px;
     box-sizing: border-box;
 
     main {
-       height: 300px;
-       overflow-y: scroll;
+       height: 350px;
+       overflow-y: auto;
+       margin-top: 15px;
     }
 
     h1{
@@ -89,7 +99,7 @@ const Container = styled.div`
 
 const Habit = styled.div`
     height: auto;
-    margin-top: 28px;
+    margin-bottom: 10px;
     background-color: #FFFFFF;
     padding: 15px;
     box-sizing: border-box;

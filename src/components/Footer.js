@@ -40,7 +40,7 @@ const DivHeader = styled.div`
     div {
         width: 27vw;
         height: 16vh;
-        margin-bottom: 8vh;
+        margin-bottom: 5vh;
     }
 
     .logo {
