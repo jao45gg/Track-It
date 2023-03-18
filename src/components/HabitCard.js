@@ -3,6 +3,7 @@ import Trash from "../styles/Trash.svg";
 import { useContext } from "react";
 import { LevelContext } from "../constant";
 import axios from "axios";
+import { weekdayChar } from "../constant";
 
 export default function HabitCard({ name, days, id }) {
 
@@ -36,13 +37,7 @@ export default function HabitCard({ name, days, id }) {
                 <img src={Trash} alt="delete-btn" onClick={boom} />
             </div>
             <div className="btn-days">
-                <button className={days.includes(7) ? "selected" : ""}>D</button>
-                <button className={days.includes(1) ? "selected" : ""}>S</button>
-                <button className={days.includes(2) ? "selected" : ""}>T</button>
-                <button className={days.includes(3) ? "selected" : ""}>Q</button>
-                <button className={days.includes(4) ? "selected" : ""}>Q</button>
-                <button className={days.includes(5) ? "selected" : ""}>S</button>
-                <button className={days.includes(6) ? "selected" : ""}>S</button>
+            {weekdayChar.map((d,index) => <button key={index} className={days.includes(index) ? "selected" : ""}>{d}</button>)}
             </div>
         </Card>
     );

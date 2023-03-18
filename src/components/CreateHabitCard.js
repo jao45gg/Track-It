@@ -1,17 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useContext } from "react";
-import { LevelContext } from "../constant";
+import { LevelContext, weekdayChar } from "../constant";
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
-export default function CreateHabitCard({ setHabitsCreation, setHabits, habits }) {
+export default function CreateHabitCard({ name, setName, days, setDays, setHabitsCreation, setHabits, habits }) {
 
-    const [name, setName] = useState("");
-    const [days, setDays] = useState([]);
+    const [isLoading, setLoading] = useState(false);
     const user = useContext(LevelContext);
 
     function createHabit(e) {
 
+        setLoading(true);
         e.preventDefault();
 
         axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`, {
@@ -22,7 +23,13 @@ export default function CreateHabitCard({ setHabitsCreation, setHabits, habits }
                 "Authorization": `Bearer ${user.token}`
             }
         })
-            .then((res) => { setHabits([...habits, res.data]) })
+            .then(res => {
+                setHabits([...habits, res.data]);
+                setLoading(false);
+                setName("");
+                setDays([]);
+                setHabitsCreation(false);
+            })
             .catch(err => {
                 if (err.response.data.details) {
                     err.response.data.details.forEach(element => {
@@ -31,25 +38,21 @@ export default function CreateHabitCard({ setHabitsCreation, setHabits, habits }
                 } else {
                     alert(err.response.data.message);
                 }
+                setLoading(false);
             })
     }
 
     return (
         <HabitCard>
             <form onSubmit={createHabit}>
-                <input type="text" placeholder="  nome do hábito" required value={name} onChange={(e => setName(e.target.value))} />
+                <input disabled={isLoading ? true : false} type="text" placeholder="  nome do hábito" required value={name} onChange={(e => setName(e.target.value))} />
                 <div className="btn-days">
-                    <button type="button" className={days.includes(7) ? "selected" : ""} onClick={() => setDays([...days, 7])}>D</button>
-                    <button type="button" className={days.includes(1) ? "selected" : ""} onClick={() => setDays([...days, 1])}>S</button>
-                    <button type="button" className={days.includes(2) ? "selected" : ""} onClick={() => setDays([...days, 2])}>T</button>
-                    <button type="button" className={days.includes(3) ? "selected" : ""} onClick={() => setDays([...days, 3])}>Q</button>
-                    <button type="button" className={days.includes(4) ? "selected" : ""} onClick={() => setDays([...days, 4])}>Q</button>
-                    <button type="button" className={days.includes(5) ? "selected" : ""} onClick={() => setDays([...days, 5])}>S</button>
-                    <button type="button" className={days.includes(6) ? "selected" : ""} onClick={() => setDays([...days, 6])}>S</button>
+                    {weekdayChar.map((d, index) => <button key={index} type="button" disabled={isLoading ? true : false} className={days.includes(index) ? "selected" : ""} onClick={() => setDays([...days, index])}>{d}</button>)}
                 </div>
                 <div className="btn-actions">
-                    <button onClick={() => setHabitsCreation(false)}>Cancelar</button>
-                    <button type="submit" className="save">Salvar</button>
+                    <button disabled={isLoading ? true : false} onClick={() => setHabitsCreation(false)}>Cancelar</button>
+                    <button disabled={isLoading ? true : false} type="submit" className="save">{isLoading ? <ThreeDots height={40}
+                    width={40} color="#FFFFFF" /> : "Salvar"}</button>
                 </div>
             </form>
         </HabitCard>

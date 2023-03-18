@@ -14,6 +14,8 @@ export default function HabitsPage() {
     const user = useContext(LevelContext);
     const [habits, setHabits] = useState([]);
     const [habitsCreation, setHabitsCreation] = useState(false);
+    const [name, setName] = useState("");
+    const [days, setDays] = useState([]);
 
     useEffect(() => {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`, {
@@ -42,9 +44,10 @@ export default function HabitsPage() {
                     <button onClick={() => setHabitsCreation(true)}>+</button>
                 </div>
                 <main>
-                    {habitsCreation && <CreateHabitCard setHabitsCreation={setHabitsCreation} setHabits={setHabits} habits={habits} />}
-                    {habits.map((h,index) =>
-                        <HabitCard key={index} name={h.name} days={h.days} id={h.id}/>
+                    {habitsCreation && <CreateHabitCard name={name} setName={setName} days={days} setDays={setDays}
+                        setHabitsCreation={setHabitsCreation} setHabits={setHabits} habits={habits} />}
+                    {habits.map((h, index) =>
+                        <HabitCard key={index} name={h.name} days={h.days} id={h.id} />
                     )}
                 </main>
                 {habits.length <= 0 && <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>}

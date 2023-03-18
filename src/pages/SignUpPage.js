@@ -2,7 +2,7 @@ import ContainerHome from "../components/ContainerHome";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
 
