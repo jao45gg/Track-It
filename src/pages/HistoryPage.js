@@ -19,7 +19,6 @@ const Container = styled.div`
 
     padding: 0 5vw 0 5vw;
     box-sizing: border-box;
-
     margin-top: 16vh;
 
     h1 {

@@ -27,34 +27,7 @@ export default function HojePage() {
                         <Checkbox>
                             <img src={vector} alt="check" />
                         </Checkbox>
-                    </Habit>
-                    <Habit>
-                        <div>
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <h2>Sequência atual: 3 dias Seu recorde: 5 dias</h2>
-                        </div>
-                        <Checkbox>
-                            <img src={vector} alt="check" />
-                        </Checkbox>
-                    </Habit>
-                    <Habit>
-                        <div>
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <h2>Sequência atual: 3 dias Seu recorde: 5 dias</h2>
-                        </div>
-                        <Checkbox>
-                            <img src={vector} alt="check" />
-                        </Checkbox>
-                    </Habit>
-                    <Habit>
-                        <div>
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <h2>Sequência atual: 3 dias Seu recorde: 5 dias</h2>
-                        </div>
-                        <Checkbox>
-                            <img src={vector} alt="check" />
-                        </Checkbox>
-                    </Habit>
+                    </Habit>             
                 </main>
             </Container>
             <Footer />
@@ -110,7 +83,6 @@ const Habit = styled.div`
         width: 54vw;
         color: #666666;
         font-size: 2.2vh;
-        background-color: red;
     }
 
     h2 {
