@@ -8,7 +8,7 @@ import { ThreeDots } from "react-loader-spinner";
 export default function CreateHabitCard({ name, setName, days, setDays, setHabitsCreation, setHabits, habits }) {
 
     const [isLoading, setLoading] = useState(false);
-    const user = useContext(LevelContext);
+    const obj = useContext(LevelContext);
 
     function createHabit(e) {
 
@@ -20,7 +20,7 @@ export default function CreateHabitCard({ name, setName, days, setDays, setHabit
             days: days
         }, {
             headers: {
-                "Authorization": `Bearer ${user.token}`
+                "Authorization": `Bearer ${obj.user.token}`
             }
         })
             .then(res => {
@@ -47,12 +47,27 @@ export default function CreateHabitCard({ name, setName, days, setDays, setHabit
             <form onSubmit={createHabit}>
                 <input disabled={isLoading ? true : false} type="text" placeholder="  nome do hábito" required value={name} onChange={(e => setName(e.target.value))} />
                 <div className="btn-days">
-                    {weekdayChar.map((d, index) => <button key={index} type="button" disabled={isLoading ? true : false} className={days.includes(index) ? "selected" : ""} onClick={() => setDays([...days, index])}>{d}</button>)}
+                    {weekdayChar.map((d, index) => <button key={index} type="button" disabled={isLoading ? true : false} className={days.includes(index) ? "selected" : ""} onClick={() => {
+
+                        if (days.includes(index)) {
+
+                            let newArr = [];
+                            for (let i = 0; i < days.length; i++) {
+                                if (days[i] !== index)
+                                    newArr.push(days[i])
+                            }
+                            setDays(newArr);
+                        } else {
+                            setDays([...days, index]);
+                        }
+
+                    }
+                    }>{d}</button>)}
                 </div>
                 <div className="btn-actions">
                     <button disabled={isLoading ? true : false} onClick={() => setHabitsCreation(false)}>Cancelar</button>
                     <button disabled={isLoading ? true : false} type="submit" className="save">{isLoading ? <ThreeDots height={40}
-                    width={40} color="#FFFFFF" /> : "Salvar"}</button>
+                        width={40} color="#FFFFFF" /> : "Salvar"}</button>
                 </div>
             </form>
         </HabitCard>

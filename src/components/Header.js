@@ -6,14 +6,14 @@ import trackIt from "../styles/TrackIt.svg"
 
 export default function Header() {
 
-    const user = useContext(LevelContext);
+    const obj = useContext(LevelContext);
 
     return (
         <DivHeader>
             <Link to="/">
                 <img className="logo" src={trackIt} alt="TrackIt" />
             </Link>
-            <img className="usrImage" src={user.image} alt={user.name} />
+            <img className="usrImage" src={obj.user.image} alt={obj.user.name} />
         </DivHeader>
     );
 }
@@ -43,6 +43,3 @@ const DivHeader = styled.div`
         border-radius: 98.5px;
     }
 `;
-
-
-const body = styled.body

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
 
-    const user = useContext(LevelContext);
+    const obj = useContext(LevelContext);
 
     return (
         <DivHeader>
@@ -16,7 +16,7 @@ export default function Footer() {
             </Link>
             <div>
                 <Link to="/hoje" style={{ textDecoration: "none" }}>
-                    <CircularProgressbar text="Hoje" background backgroundPadding={6} value={66} styles={buildStyles({
+                    <CircularProgressbar text="Hoje" background backgroundPadding={6} value={obj.percentage} styles={buildStyles({
                         backgroundColor: "#52B6FF",
                         trailColor: "transparent",
                         pathColor: "#FFFFFF",

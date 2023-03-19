@@ -11,7 +11,7 @@ import axios from "axios";
 
 export default function HabitsPage() {
 
-    const user = useContext(LevelContext);
+    const obj = useContext(LevelContext);
     const [habits, setHabits] = useState([]);
     const [habitsCreation, setHabitsCreation] = useState(false);
     const [name, setName] = useState("");
@@ -20,7 +20,7 @@ export default function HabitsPage() {
     useEffect(() => {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`, {
             headers: {
-                "Authorization": `Bearer ${user.token}`
+                "Authorization": `Bearer ${obj.user.token}`
             }
         })
             .then(res => { setHabits(res.data) })

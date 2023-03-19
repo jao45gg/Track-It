@@ -7,7 +7,7 @@ import { weekdayChar } from "../constant";
 
 export default function HabitCard({ name, days, id }) {
 
-    const user = useContext(LevelContext);
+    const obj = useContext(LevelContext);
 
     function boom() {
 
@@ -15,7 +15,7 @@ export default function HabitCard({ name, days, id }) {
 
             axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, {
                 headers: {
-                    "Authorization": `Bearer ${user.token}`
+                    "Authorization": `Bearer ${obj.user.token}`
                 }
             })
                 .catch(err => {

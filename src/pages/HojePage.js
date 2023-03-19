@@ -1,36 +1,146 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { LevelContext } from "../constant";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import vector from "../styles/Vector.svg"
 import { Body } from "../styles/styles";
+import axios from "axios";
+import dayjs from "dayjs";
 
-export default function HojePage() {
+export default function HojePage({ percentage, setPercentage }) {
 
-    const user = useContext(LevelContext);
+    const obj = useContext(LevelContext);
+    const [habits, setHabits] = useState([]);
+    const [habitsCheck, setHabitsCheck] = useState([]);
+
+    useEffect(() => {
+        axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`, {
+            headers: {
+                "Authorization": `Bearer ${obj.user.token}`
+            }
+        })
+            .then(res => {
+                setHabits(res.data);
+
+                let arr = [];
+                for (let index = 0; index < res.data.length; index++) {
+                    if (res.data[index].done)
+                        arr.push(res.data[index].id);
+                }
+                setHabitsCheck(arr);
+            })
+            .catch(err => {
+                if (err.response.data.details) {
+                    err.response.data.details.forEach(element => {
+                        alert(element);
+                    });
+                } else {
+                    alert(err.response.data.message);
+                }
+            })
+
+        let num = 0
+        if(habits.length > 0 && habitsCheck.length > 0)
+            num = (habitsCheck.length/habits.length) * 100;
+        setPercentage(num);
+
+    }, [habitsCheck]);
+
+    function checkHabit(id) {
+
+        if (habitsCheck.includes(id)) {
+
+            let newArr = [];
+            for (let index = 0; index < habitsCheck.length; index++) {
+                if (habitsCheck[index] !== id)
+                    newArr.push(habitsCheck[index])
+            }
+
+            axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, {
+                headers: {
+                    "Authorization": `Bearer ${obj.user.token}`
+                }
+            })
+                .then(() => setTimeout(() => setHabitsCheck(newArr), 1000))
+                .catch(err => {
+                    if (err.response.data.details) {
+                        err.response.data.details.forEach(element => {
+                            alert(element);
+                        });
+                    } else {
+                        alert(err.response.data.message);
+                    }
+                })
+
+        } else {
+
+            axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, {}, {
+                headers: {
+                    "Authorization": `Bearer ${obj.user.token}`
+                }
+            })
+                .then(setTimeout(() => setHabitsCheck([...habitsCheck, id]), 1000))
+                .catch(err => {
+                    if (err.response.data.details) {
+                        err.response.data.details.forEach(element => {
+                            alert(element);
+                        });
+                    } else {
+                        alert(err.response.data.message);
+                    }
+                })
+
+        }
+
+    }
+
+    function dia(day) {
+        switch (day) {
+            case "Monday":
+                return "Segunda";
+            case "Tuesday":
+                return "Terça";
+            case "Wednesday":
+                return "Quarta";
+            case "Thursday":
+                return "Quinta";
+            case "Friday":
+                return "Sexta";
+            case "Saturday":
+                return "Sábado";
+            case "Sunday":
+                return "Domingo";
+            default:
+                return "Error"
+        }
+    }
 
     return (
         <Body backColor="#E5E5E5">
             <Header />
             <Container>
                 <div className="fixed">
-                    <h1>Segunda, 17/05</h1>
-                    <h2>Nenhum hábito concluído ainda</h2>
+                    <h1>{`${dia(dayjs().format("dddd"))}, ${dayjs().format("DD/MM")}`}</h1>
+                    <h2 className={percentage === 0 ? "" : "done"}>{percentage === 0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</h2>
                 </div>
                 <main>
-                    <Habit>
-                        <div>
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <h2>Sequência atual: 3 dias Seu recorde: 5 dias</h2>
-                        </div>
-                        <Checkbox>
-                            <img src={vector} alt="check" />
-                        </Checkbox>
-                    </Habit>             
+                    {habits.map(h =>
+                        <Habit key={h.id}>
+                            <div>
+                                <h1>{h.name}</h1>
+                                <h2>
+                                    Sequência atual: <span className={h.done ? "done" : ""}>{h.currentSequence} dias</span> <br />
+                                    Seu recorde: <span className={h.currentSequence === h.highestSequence && h.currentSequence !== 0 ? "done" : ""}> {h.highestSequence} dias </span>
+                                </h2>
+                            </div>
+                            <Checkbox backColor={h.done ? "done" : ""} onClick={() => checkHabit(h.id)}>
+                                <img src={vector} alt="check" />
+                            </Checkbox>
+                        </Habit>)}
                 </main>
             </Container>
-            <Footer />
+            <Footer value={percentage} />
         </Body>
     );
 }
@@ -41,6 +151,10 @@ const Container = styled.div`
     padding: 0 6vw 0 6vw;
     box-sizing: border-box;
     display: flex;
+
+    .done {
+        color: #8FC549;
+    } 
 
     main {
         margin-top: 12vh;
@@ -80,26 +194,33 @@ const Habit = styled.div`
     align-items: center;
 
     h1 {
-        width: 54vw;
+        flex-wrap: wrap;
+        max-height: 3vh;
+        max-width: 54vw;
         color: #666666;
-        font-size: 2.2vh;
+        font-size: 2.5vh;
+        overflow-y: auto;
     }
 
     h2 {
         color: #666666;
-        font-size: 1.6vh;
-        width: 45vw;
+        font-size: 1.7vh;
+        width: 44vw;
+
+        .done {
+            color: #8FC549;
+        }   
     }
 `
 
 const Checkbox = styled.div`
     width: 21vw;
     height: 11.5vh;
-    background-color: green;
+    background-color: ${props => props.backColor === "done" ? "#8FC549" : "#EBEBEB"};
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #E7E7E7;
+    border: ${props => props.backColor === "done" ? "0" : "1px solid #E7E7E7"};
     border-radius: 5px;
 
     img {
