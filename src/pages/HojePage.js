@@ -41,8 +41,8 @@ export default function HojePage({ percentage, setPercentage }) {
             })
 
         let num = 0
-        if(habits.length > 0 && habitsCheck.length > 0)
-            num = (habitsCheck.length/habits.length) * 100;
+        if (habits.length > 0 && habitsCheck.length > 0)
+            num = (habitsCheck.length / habits.length) * 100;
         setPercentage(num);
 
     }, [habitsCheck]);
@@ -121,20 +121,22 @@ export default function HojePage({ percentage, setPercentage }) {
             <Header />
             <Container>
                 <div className="fixed">
-                    <h1>{`${dia(dayjs().format("dddd"))}, ${dayjs().format("DD/MM")}`}</h1>
-                    <h2 className={percentage === 0 ? "" : "done"}>{percentage === 0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</h2>
+                    <h1 data-test="today">{`${dia(dayjs().format("dddd"))}, ${dayjs().format("DD/MM")}`}</h1>
+                    <h2 data-test="today-counter" className={percentage === 0 ? "" : "done"}>{percentage === 0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</h2>
                 </div>
                 <main>
                     {habits.map(h =>
-                        <Habit key={h.id}>
+                        <Habit data-test="today-habit-container" key={h.id}>
                             <div>
-                                <h1>{h.name}</h1>
-                                <h2>
+                                <h1 data-test="today-habit-name">{h.name}</h1>
+                                <h2 data-test="today-habit-sequence">
                                     Sequência atual: <span className={h.done ? "done" : ""}>{h.currentSequence} dias</span> <br />
+                                </h2>
+                                <h2 data-test="today-habit-record">
                                     Seu recorde: <span className={h.currentSequence === h.highestSequence && h.currentSequence !== 0 ? "done" : ""}> {h.highestSequence} dias </span>
                                 </h2>
                             </div>
-                            <Checkbox backColor={h.done ? "done" : ""} onClick={() => checkHabit(h.id)}>
+                            <Checkbox data-test="today-habit-check-btn" backColor={h.done ? "done" : ""} onClick={() => checkHabit(h.id)}>
                                 <img src={vector} alt="check" />
                             </Checkbox>
                         </Habit>)}
@@ -195,7 +197,7 @@ const Habit = styled.div`
 
     h1 {
         flex-wrap: wrap;
-        max-height: 3vh;
+        height: 3.5vh;
         max-width: 54vw;
         color: #666666;
         font-size: 2.5vh;

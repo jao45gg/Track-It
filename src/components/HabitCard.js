@@ -33,11 +33,11 @@ export default function HabitCard({ name, days, id }) {
     return (
         <Card>
             <div>
-                <h1>{name}</h1>
-                <img src={Trash} alt="delete-btn" onClick={boom} />
+                <h1 data-test="habit-name">{name}</h1>
+                <img data-test="habit-delete-btn" src={Trash} alt="delete-btn" onClick={boom} />
             </div>
             <div className="btn-days">
-            {weekdayChar.map((d,index) => <button key={index} className={days.includes(index) ? "selected" : ""}>{d}</button>)}
+            {weekdayChar.map((d,index) => <button data-test="habit-day" key={index} className={days.includes(index) ? "selected" : ""}>{d}</button>)}
             </div>
         </Card>
     );

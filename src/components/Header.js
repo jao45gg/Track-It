@@ -9,7 +9,7 @@ export default function Header() {
     const obj = useContext(LevelContext);
 
     return (
-        <DivHeader>
+        <DivHeader data-test="header">
             <Link to="/">
                 <img className="logo" src={trackIt} alt="TrackIt" />
             </Link>

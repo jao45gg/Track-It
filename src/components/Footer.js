@@ -10,12 +10,12 @@ export default function Footer() {
     const obj = useContext(LevelContext);
 
     return (
-        <DivHeader>
-            <Link to="/habitos" style={{ textDecoration: "none" }}>
+        <DivFooter data-test="menu">
+            <Link data-test="habit-link" to="/habitos" style={{ textDecoration: "none" }}>
                 <h1>Hábitos</h1>
             </Link>
             <div>
-                <Link to="/hoje" style={{ textDecoration: "none" }}>
+                <Link data-test="today-link" to="/hoje" style={{ textDecoration: "none" }}>
                     <CircularProgressbar text="Hoje" background backgroundPadding={6} value={obj.percentage} styles={buildStyles({
                         backgroundColor: "#52B6FF",
                         trailColor: "transparent",
@@ -24,14 +24,14 @@ export default function Footer() {
                     })} />
                 </Link>
             </div>
-            <Link to="/historico" style={{ textDecoration: "none" }}>
+            <Link data-test="history-link" to="/historico" style={{ textDecoration: "none" }}>
                 <h1>Histórico</h1>
             </Link>
-        </DivHeader>
+        </DivFooter>
     );
 }
 
-const DivHeader = styled.div`
+const DivFooter = styled.div`
     background-color: #FFFFFF;
     width: 100vw;
     height: 12vh;

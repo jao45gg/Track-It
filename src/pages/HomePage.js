@@ -45,7 +45,7 @@ export default function HomePage({ setUser }) {
                     <button data-test="login-btn" type="submit" disabled={isLoading ? true : false}>{isLoading ? <ThreeDots color="#FFFFFF" /> : "Entrar"}</button>
                     <h2 data-test="signup-link" onClick={() => {
                         if (!isLoading)
-                            navigate("/cadastro")
+                            navigate("/cadastro");
                     }}>Não tem uma conta? Cadastre-se!</h2>
                 </form>
             </ContainerHome>

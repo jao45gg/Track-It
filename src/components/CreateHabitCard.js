@@ -45,9 +45,9 @@ export default function CreateHabitCard({ name, setName, days, setDays, setHabit
     return (
         <HabitCard>
             <form onSubmit={createHabit}>
-                <input disabled={isLoading ? true : false} type="text" placeholder="  nome do hábito" required value={name} onChange={(e => setName(e.target.value))} />
+                <input data-test="habit-name-input" disabled={isLoading ? true : false} type="text" placeholder="  nome do hábito" required value={name} onChange={(e => setName(e.target.value))} />
                 <div className="btn-days">
-                    {weekdayChar.map((d, index) => <button key={index} type="button" disabled={isLoading ? true : false} className={days.includes(index) ? "selected" : ""} onClick={() => {
+                    {weekdayChar.map((d, index) => <button data-test="habit-day" key={index} type="button" disabled={isLoading ? true : false} className={days.includes(index) ? "selected" : ""} onClick={() => {
 
                         if (days.includes(index)) {
 
@@ -65,8 +65,8 @@ export default function CreateHabitCard({ name, setName, days, setDays, setHabit
                     }>{d}</button>)}
                 </div>
                 <div className="btn-actions">
-                    <button disabled={isLoading ? true : false} onClick={() => setHabitsCreation(false)}>Cancelar</button>
-                    <button disabled={isLoading ? true : false} type="submit" className="save">{isLoading ? <ThreeDots height={40}
+                    <button data-test="habit-create-cancel-btn" disabled={isLoading ? true : false} onClick={() => setHabitsCreation(false)}>Cancelar</button>
+                    <button data-test="habit-create-save-btn" disabled={isLoading ? true : false} type="submit" className="save">{isLoading ? <ThreeDots height={40}
                         width={40} color="#FFFFFF" /> : "Salvar"}</button>
                 </div>
             </form>
