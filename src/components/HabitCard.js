@@ -31,7 +31,7 @@ export default function HabitCard({ name, days, id }) {
     }
 
     return (
-        <Card>
+        <Card data-test="habit-container">
             <div>
                 <h1 data-test="habit-name">{name}</h1>
                 <img data-test="habit-delete-btn" src={Trash} alt="delete-btn" onClick={boom} />

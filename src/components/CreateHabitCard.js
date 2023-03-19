@@ -43,7 +43,7 @@ export default function CreateHabitCard({ name, setName, days, setDays, setHabit
     }
 
     return (
-        <HabitCard>
+        <HabitCard data-test="habit-create-container">
             <form onSubmit={createHabit}>
                 <input data-test="habit-name-input" disabled={isLoading ? true : false} type="text" placeholder="  nome do hábito" required value={name} onChange={(e => setName(e.target.value))} />
                 <div className="btn-days">

@@ -44,10 +44,10 @@ export default function HabitsPage() {
                     <button data-test="habit-create-btn" onClick={() => setHabitsCreation(true)}>+</button>
                 </div>
                 <main>
-                    {habitsCreation && <CreateHabitCard data-test="habit-create-container" name={name} setName={setName} days={days} setDays={setDays}
+                    {habitsCreation && <CreateHabitCard name={name} setName={setName} days={days} setDays={setDays}
                         setHabitsCreation={setHabitsCreation} setHabits={setHabits} habits={habits} />}
                     {habits.map((h, index) =>
-                        <HabitCard data-test="habit-container" key={index} name={h.name} days={h.days} id={h.id} />
+                        <HabitCard key={index} name={h.name} days={h.days} id={h.id} />
                     )}
                 </main>
                 {habits.length <= 0 && <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>}
