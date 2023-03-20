@@ -38,8 +38,8 @@ const DivHeader = styled.div`
     }
 
     .usrImage {
-        width: 15vw;
-        height: 8.5vh;
+        width: 15.5vw;
+        height: 8.6vh;
         border-radius: 98.5px;
     }
 `;
