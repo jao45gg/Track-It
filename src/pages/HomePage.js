@@ -21,7 +21,10 @@ export default function HomePage({ setUser }) {
             email: email,
             password: password
         })
-            .then(res => { setUser(res.data); navigate("/hoje"); })
+            .then(res => {
+                setUser(res.data);
+                navigate("/hoje");
+            })
             .catch(err => {
                 if (err.response.data.details) {
                     err.response.data.details.forEach(element => {

@@ -40,29 +40,30 @@ export default function CreateHabitCard({ name, setName, days, setDays, setHabit
                 }
                 setLoading(false);
             })
-    }
+    };
 
     return (
         <HabitCard data-test="habit-create-container">
             <form onSubmit={createHabit}>
-                <input data-test="habit-name-input" disabled={isLoading ? true : false} type="text" placeholder="  nome do hábito" required value={name} onChange={(e => setName(e.target.value))} />
+                <input data-test="habit-name-input" disabled={isLoading ? true : false}
+                    type="text" placeholder="  nome do hábito" required value={name} onChange={(e => setName(e.target.value))} />
                 <div className="btn-days">
-                    {weekdayChar.map((d, index) => <button data-test="habit-day" key={index} type="button" disabled={isLoading ? true : false} className={days.includes(index) ? "selected" : ""} onClick={() => {
+                    {weekdayChar.map((d, index) => <button data-test="habit-day" key={index} type="button"
+                        disabled={isLoading ? true : false} className={days.includes(index) ? "selected" : ""} onClick={() => {
 
-                        if (days.includes(index)) {
+                            if (days.includes(index)) {
 
-                            let newArr = [];
-                            for (let i = 0; i < days.length; i++) {
-                                if (days[i] !== index)
-                                    newArr.push(days[i])
+                                let newArr = [];
+                                for (let i = 0; i < days.length; i++) {
+                                    if (days[i] !== index)
+                                        newArr.push(days[i]);
+                                }
+                                setDays(newArr);
+                            } else {
+                                setDays([...days, index]);
                             }
-                            setDays(newArr);
-                        } else {
-                            setDays([...days, index]);
                         }
-
-                    }
-                    }>{d}</button>)}
+                        }>{d}</button>)}
                 </div>
                 <div className="btn-actions">
                     <button data-test="habit-create-cancel-btn" disabled={isLoading ? true : false} onClick={() => setHabitsCreation(false)}>Cancelar</button>

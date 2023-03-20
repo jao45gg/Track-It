@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HojePage from "./pages/HojePage";
 import HomePage from "./pages/HomePage";
 import SignUp from "./pages/SignUpPage";
-import HabitsPage from "./pages/HabitsPage"
-import HistoryPage from "./pages/HistoryPage"
+import HabitsPage from "./pages/HabitsPage";
+import HistoryPage from "./pages/HistoryPage";
 import { LevelContext } from "./constant";
 
 export default function App() {

@@ -1,7 +1,7 @@
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import styled from "styled-components";
-import { Body } from "../styles/styles"
+import { Body } from "../styles/styles";
 import { useEffect, useState } from "react";
 import CreateHabitCard from "../components/CreateHabitCard.js";
 import HabitCard from "../components/HabitCard.js";
@@ -23,7 +23,7 @@ export default function HabitsPage() {
                 "Authorization": `Bearer ${obj.user.token}`
             }
         })
-            .then(res => { setHabits(res.data) })
+            .then(res => { setHabits(res.data); })
             .catch(err => {
                 if (err.response.data.details) {
                     err.response.data.details.forEach(element => {
@@ -33,7 +33,7 @@ export default function HabitsPage() {
                     alert(err.response.data.message);
                 }
             })
-    }, [habits])
+    }, [habits, obj.user.token]);
 
     return (
         <Body backColor="#E5E5E5">

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logo from "../styles/logo.svg"
+import logo from "../styles/logo.svg";
 import { Link } from "react-router-dom";
 
 export default function ContainerHome({ children, isLoading}) {
@@ -69,4 +69,4 @@ const Container = styled.div`
         text-decoration-line: underline;
         font-family: 'Lexend Deca', sans-serif;
     }
-`
+`;

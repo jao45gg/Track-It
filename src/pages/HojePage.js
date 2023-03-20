@@ -3,7 +3,7 @@ import { LevelContext } from "../constant";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import vector from "../styles/Vector.svg"
+import vector from "../styles/Vector.svg";
 import { Body } from "../styles/styles";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -13,6 +13,16 @@ export default function HojePage({ percentage, setPercentage }) {
     const obj = useContext(LevelContext);
     const [habits, setHabits] = useState([]);
     const [habitsCheck, setHabitsCheck] = useState([]);
+
+    function error(err) {
+        if (err.response.data.details) {
+            err.response.data.details.forEach(element => {
+                alert(element);
+            });
+        } else {
+            alert(err.response.data.message);
+        }
+    }
 
     useEffect(() => {
         axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`, {
@@ -30,22 +40,14 @@ export default function HojePage({ percentage, setPercentage }) {
                 }
                 setHabitsCheck(arr);
             })
-            .catch(err => {
-                if (err.response.data.details) {
-                    err.response.data.details.forEach(element => {
-                        alert(element);
-                    });
-                } else {
-                    alert(err.response.data.message);
-                }
-            })
+            .catch(err => { error(err); })
 
         let num = 0
         if (habits.length > 0 && habitsCheck.length > 0)
             num = (habitsCheck.length / habits.length) * 100;
         setPercentage(num);
 
-    }, [habitsCheck]);
+    }, [habitsCheck, habits.length, setPercentage, obj.user.token]);
 
     function checkHabit(id) {
 
@@ -63,15 +65,7 @@ export default function HojePage({ percentage, setPercentage }) {
                 }
             })
                 .then(() => setTimeout(() => setHabitsCheck(newArr), 1000))
-                .catch(err => {
-                    if (err.response.data.details) {
-                        err.response.data.details.forEach(element => {
-                            alert(element);
-                        });
-                    } else {
-                        alert(err.response.data.message);
-                    }
-                })
+                .catch(err => { error(err); })
 
         } else {
 
@@ -90,7 +84,6 @@ export default function HojePage({ percentage, setPercentage }) {
                         alert(err.response.data.message);
                     }
                 })
-
         }
 
     }
@@ -122,7 +115,8 @@ export default function HojePage({ percentage, setPercentage }) {
             <Container>
                 <div className="fixed">
                     <h1 data-test="today">{`${dia(dayjs().format("dddd"))}, ${dayjs().format("DD/MM")}`}</h1>
-                    <h2 data-test="today-counter" className={percentage === 0 ? "" : "done"}>{percentage === 0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</h2>
+                    <h2 data-test="today-counter" className={percentage === 0 ? "" : "done"}>
+                        {percentage === 0 ? "Nenhum hábito concluído ainda" : `${percentage.toFixed(2)}% dos hábitos concluídos`}</h2>
                 </div>
                 <main>
                     {habits.map(h =>
@@ -133,7 +127,8 @@ export default function HojePage({ percentage, setPercentage }) {
                                     Sequência atual: <span className={h.done ? "done" : ""}>{h.currentSequence} dias</span> <br />
                                 </h2>
                                 <h2 data-test="today-habit-record">
-                                    Seu recorde: <span className={h.currentSequence === h.highestSequence && h.currentSequence !== 0 ? "done" : ""}> {h.highestSequence} dias </span>
+                                    Seu recorde: <span className={h.currentSequence === h.highestSequence && h.currentSequence !== 0 ?
+                                        "done" : ""}> {h.highestSequence} dias </span>
                                 </h2>
                             </div>
                             <Checkbox data-test="today-habit-check-btn" backColor={h.done ? "done" : ""} onClick={() => checkHabit(h.id)}>
@@ -182,7 +177,7 @@ const Container = styled.div`
         font-size: 2.3vh;
         margin-top: 1vh;
     }
-`
+`;
 
 const Habit = styled.div`
     width: 88vw;
@@ -213,7 +208,7 @@ const Habit = styled.div`
             color: #8FC549;
         }   
     }
-`
+`;
 
 const Checkbox = styled.div`
     width: 21vw;
@@ -229,4 +224,4 @@ const Checkbox = styled.div`
         width: 10.5vw;
         height: 5vh;
     }
-`
+`;
