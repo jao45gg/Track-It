@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { LevelContext } from "../constant";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import vector from "../styles/Vector.svg";
+import vector from "../styles/assets/Vector.svg";
 import { Body } from "../styles/styles";
 import axios from "axios";
 import dayjs from "dayjs";

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Trash from "../styles/Trash.svg";
+import Trash from "../styles/assets/Trash.svg";
 import { useContext } from "react";
 import { LevelContext } from "../constant";
 import axios from "axios";

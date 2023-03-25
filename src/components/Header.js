@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { LevelContext } from "../constant";
-import trackIt from "../styles/TrackIt.svg";
+import trackIt from "../styles/assets/TrackIt.svg";
 
 export default function Header() {
 
